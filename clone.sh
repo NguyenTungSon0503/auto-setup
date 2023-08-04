@@ -37,6 +37,13 @@ cd
 cd E-commerce-BackEnd
 npm i 
 npm i -g pm2
+pm2 status
+pm2 delete server
+pm2 start --name "server" app.js
+cd ../auto-setup
+source ./env.sh
+sudo env PATH=$PATH:/home/$(whoami)/.nvm/versions/node/v$NODE_VERSION/bin /home/$(whoami)/.nvm/versions/node/v$NODE_VERSION/lib/node_modules/pm2/bin/pm2 startup systemd -u $(whoami) --hp /home/$(whoami)
+pm2 save
 
 cd 
 cd E-commerce-Admin
