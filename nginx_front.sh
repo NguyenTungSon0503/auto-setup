@@ -1,7 +1,7 @@
-#Install Nginx
-# sudo apt update
-# sudo apt install nginx
-# sudo systemctl status nginx
+# Install Nginx
+sudo apt update
+sudo apt install nginx
+sudo systemctl status nginx
 
 source ./env.sh
 #User
@@ -32,28 +32,28 @@ EOF'
 sudo systemctl restart nginx
 
 #Admin
-# cd
-# cd E-commerce-Admin
-# npm run build
-# sudo rm -rf /etc/nginx/sites-enabled/default
-# sudo rm -rf /var/www/html/admin
-# sudo scp -r ./build /var/www/html/admin
-# sudo bash -c 'cat << EOF > /etc/nginx/sites-enabled/admin
-# server {
-#   listen 81;
-#   listen [::]:81;
-#   server_name localhost;
+cd
+cd E-commerce-Admin
+npm run build
+sudo rm -rf /etc/nginx/sites-enabled/default
+sudo rm -rf /var/www/html/admin
+sudo scp -r ./build /var/www/html/admin
+sudo bash -c 'cat << EOF > /etc/nginx/sites-enabled/admin
+server {
+  listen 81;
+  listen [::]:81;
+  server_name localhost;
 
-#   location / {
-#     root /var/www/html/admin;
-#     index index.html;
-#     try_files \$uri /index.html;
-#   }
+  location / {
+    root /var/www/html/admin;
+    index index.html;
+    try_files \$uri /index.html;
+  }
 
-#   location /api/ {
-#     proxy_pass http://'$IP':5000;
-#  }
-# }
-# EOF'
-# sudo systemctl restart nginx
+  location /api/ {
+    proxy_pass http://'$IP':5000;
+ }
+}
+EOF'
+sudo systemctl restart nginx
 
