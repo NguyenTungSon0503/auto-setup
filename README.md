@@ -1,6 +1,8 @@
 # auto-setup
 auto setup server shell file  
-
+  
+Before running, change your IP in IP variables at env.sh file  
+  
 ```console
 cd auto-setup
 ```
