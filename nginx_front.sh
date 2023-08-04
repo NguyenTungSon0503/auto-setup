@@ -3,6 +3,7 @@ sudo apt update
 sudo apt install nginx
 sudo systemctl status nginx
 
+source ./env.sh
 #User
 cd
 cd E-commerce-User
@@ -23,7 +24,7 @@ server {
   }
 
   location /api/ {
-    proxy_pass http://20.2.87.138:5000;
+    proxy_pass http://'$IP':5000;
  }
 
 }
@@ -50,7 +51,7 @@ server {
   }
 
   location /api/ {
-    proxy_pass http://20.2.87.138:5000;
+    proxy_pass http://'$IP':5000;
  }
 }
 EOF'
