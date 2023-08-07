@@ -1,6 +1,6 @@
 # Install Nginx
 sudo apt update
-sudo apt install nginx
+sudo apt-get install -y nginx
 sudo systemctl status nginx
 
 source ./env.sh
