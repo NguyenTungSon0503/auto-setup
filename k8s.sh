@@ -45,6 +45,7 @@ if (systemctl -q is-active containerd)
     sudo systemctl restart containerd
     sudo systemctl enable containerd   
 fi
+sudo chmod 777 /etc/containerd/config.toml
 sudo systemctl enable kubelet
 sudo kubeadm config images pull --cri-socket unix:///run/containerd/containerd.sock --kubernetes-version v1.26.1
 sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.26.1  --control-plane-endpoint=$(hostname) --ignore-preflight-errors=all  --cri-socket unix:///run/containerd/containerd.sock
