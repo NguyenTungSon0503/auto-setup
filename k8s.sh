@@ -45,7 +45,10 @@ if (systemctl -q is-active containerd)
     sudo systemctl restart containerd
     sudo systemctl enable containerd   
 fi
+containerd config default > /etc/containerd/config.toml
 sudo chmod 777 /etc/containerd/config.toml
+sudo systemctl restart containerd
+sudo systemctl enable containerd
 sudo systemctl enable kubelet
 sudo kubeadm config images pull --cri-socket unix:///run/containerd/containerd.sock --kubernetes-version v1.26.1
 sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.26.1  --control-plane-endpoint=$(hostname) --ignore-preflight-errors=all  --cri-socket unix:///run/containerd/containerd.sock
@@ -59,4 +62,4 @@ kubectl taint node $(hostname) node-role.kubernetes.io/control-plane:NoSchedule-
 kubectl taint node $(hostname) node-role.kubernetes.io/master:NoSchedule-
 wget https://get.helm.sh/helm-v3.7.2-linux-amd64.tar.gz
 tar -xvf helm-v3.7.2-linux-amd64.tar.gz
-mv linux-amd64/helm /usr/local/bin/
+sudo mv linux-amd64/helm /usr/local/bin/
