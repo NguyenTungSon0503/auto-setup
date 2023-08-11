@@ -5,6 +5,7 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt
 echo "kubeadm install"
 sudo apt update -y
 sudo apt -y install vim git curl wget kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00
+sudo apt-mark hold kubelet kubeadm kubectl
 echo "memory swapoff"
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo swapoff -a
