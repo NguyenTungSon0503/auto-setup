@@ -37,13 +37,6 @@ EOF'
 
 source ./env.sh
 #User
-cd
-cd E-commerce-User
-npm run build
-sudo rm -rf /etc/nginx/sites-available/default
-sudo rm -rf /etc/nginx/sites-enabled/default
-sudo rm -rf /var/www/html/ecom
-sudo scp -r ./build /var/www/html/ecom
 sudo -E DOMAIN_HOST=$DOMAIN_HOST -E bash -c 'cat << EOF > /etc/nginx/sites-available/ecom
 server {
   listen 80;
@@ -54,20 +47,20 @@ server {
     root /var/www/html/ecom;
     index index.html;
   location / {
-    try_files $uri /index.html;
+    try_files \$uri /index.html;
   }
 
   location /api/ {
     proxy_pass http://'$IP':5000;
     proxy_read_timeout 300;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header Upgrade \$http_upgrade;
     proxy_set_header Connection 'upgrade';
-    proxy_cache_bypass $http_upgrade;
+    proxy_cache_bypass \$http_upgrade;
  }
 
-  if ($http_x_forwarded_proto = "http") {
+  if (\$http_x_forwarded_proto = "http") {
       return 301 https://\$server_name\$request_uri;
   }
 
@@ -85,17 +78,17 @@ server {
     root /var/www/html/ecom;
     index index.html;
   location / {
-    try_files $uri /index.html;
+    try_files \$uri /index.html;
   }
 
   location /api/ {
     proxy_pass http://'$IP':5000;
     proxy_read_timeout 300;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header Upgrade \$http_upgrade;
     proxy_set_header Connection 'upgrade';
-    proxy_cache_bypass $http_upgrade;
+    proxy_cache_bypass \$http_upgrade;
  }
 
 }
