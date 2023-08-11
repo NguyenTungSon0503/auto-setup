@@ -1,3 +1,7 @@
+sudo apt update
+sudo apt-get install -y nginx
+sudo systemctl status nginx
+
 cd
 cd E-commerce-User
 npm run build

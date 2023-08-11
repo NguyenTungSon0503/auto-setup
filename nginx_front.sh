@@ -1,7 +1,3 @@
-# Install Nginx
-sudo apt update
-sudo apt-get install -y nginx
-sudo systemctl status nginx
 
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
