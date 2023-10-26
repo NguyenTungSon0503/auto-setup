@@ -35,7 +35,6 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 EOF'
 
 
-source ./env.sh
 #User
 cd
 cd E-commerce-User
@@ -44,6 +43,9 @@ sudo rm -rf /etc/nginx/sites-available/default
 sudo rm -rf /etc/nginx/sites-enabled/default
 sudo rm -rf /var/www/html/ecom
 sudo scp -r ./build /var/www/html/ecom
+cd
+cd auto-setup/scripts/
+source ./env.sh
 sudo -E DOMAIN_HOST=$DOMAIN_HOST -E bash -c 'cat << EOF > /etc/nginx/sites-available/nguyentungson.tech.conf
 server {
     listen 80;
@@ -105,6 +107,9 @@ npm run build
 sudo rm -rf /etc/nginx/sites-enabled/default
 sudo rm -rf /var/www/html/admin
 sudo scp -r ./build /var/www/html/admin
+cd
+cd auto-setup/scripts/
+source ./env.sh
 sudo -E ADMIN_DOMAIN_HOST=$ADMIN_DOMAIN_HOST -E bash -c 'cat << EOF > /etc/nginx/sites-available/admin.nguyentungson.tech.conf
 server {
     listen 80;
