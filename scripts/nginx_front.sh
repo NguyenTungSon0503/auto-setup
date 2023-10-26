@@ -44,89 +44,117 @@
 # sudo rm -rf /etc/nginx/sites-enabled/default
 # sudo rm -rf /var/www/html/ecom
 # sudo scp -r ./build /var/www/html/ecom
-# sudo -E DOMAIN_HOST=$DOMAIN_HOST -E bash -c 'cat << EOF > /etc/nginx/sites-available/ecom
+# sudo -E DOMAIN_HOST=$DOMAIN_HOST -E bash -c 'cat << EOF > /etc/nginx/sites-available/nguyentungson.tech.conf
 # server {
-#   listen 80;
-#   listen [::]:80;
+#     listen 80;
+#     listen [::]:80;
 
-#   server_name $DOMAIN_HOST www.$DOMAIN_HOST;
-
+#     server_name $DOMAIN_HOST www.$DOMAIN_HOST;
 #     root /var/www/html/ecom;
 #     index index.html;
 #   location / {
-#     try_files $uri /index.html;
+#     try_files \$uri /index.html;
 #   }
-
 #   location /api/ {
 #     proxy_pass http://'$IP':5000;
 #     proxy_read_timeout 300;
-#     proxy_set_header Host $host;
-#     proxy_set_header X-Real-IP $remote_addr;
-#     proxy_set_header Upgrade $http_upgrade;
+#     proxy_set_header Host \$host;
+#     proxy_set_header X-Real-IP \$remote_addr;
+#     proxy_set_header Upgrade \$http_upgrade;
 #     proxy_set_header Connection 'upgrade';
-#     proxy_cache_bypass $http_upgrade;
+#     proxy_cache_bypass \$http_upgrade;
 #  }
-
-#   if ($http_x_forwarded_proto = "http") {
+#     if (\$http_x_forwarded_proto = "http") {
 #       return 301 https://\$server_name\$request_uri;
 #   }
-
 # }
 
 # server {
 #     listen 443 ssl http2;
 #     listen [::]:443 ssl http2;
-
 #     server_name $DOMAIN_HOST;
-    
+
 #     include snippets/ssl-$DOMAIN_HOST.conf;
 #     include snippets/ssl-params.conf;
 
 #     root /var/www/html/ecom;
 #     index index.html;
-#   location / {
-#     try_files $uri /index.html;
-#   }
 
-#   location /api/ {
-#     proxy_pass http://'$IP':5000;
-#     proxy_read_timeout 300;
-#     proxy_set_header Host $host;
-#     proxy_set_header X-Real-IP $remote_addr;
-#     proxy_set_header Upgrade $http_upgrade;
-#     proxy_set_header Connection 'upgrade';
-#     proxy_cache_bypass $http_upgrade;
-#  }
+#     location / {
+#         try_files \$uri /index.html;
+#     }
 
+#     location /api/ {
+#         proxy_pass http://'$IP':5000;
+#         proxy_read_timeout 300;
+#         proxy_set_header Host \$host;
+#         proxy_set_header X-Real-IP \$remote_addr;
+#         proxy_set_header Upgrade \$http_upgrade;
+#         proxy_set_header Connection 'upgrade';
+#         proxy_cache_bypass \$http_upgrade;
+#     }
 # }
-
 # EOF'
 # sudo ln -s /etc/nginx/sites-available/ecom /etc/nginx/sites-enabled/ 
 # sudo systemctl restart nginx
 
-#Admin
-cd
-cd E-commerce-Admin
-# npm run build
-sudo rm -rf /etc/nginx/sites-enabled/default
-sudo rm -rf /var/www/html/admin
-sudo scp -r ./build /var/www/html/admin
-sudo -E IT=20.2.240.89 bash -c 'cat << EOF > /etc/nginx/sites-enabled/admin
-server {
-  listen 81;
-  listen [::]:81;
-  server_name localhost;
+# #Admin
+# cd
+# cd E-commerce-Admin
+# # npm run build
+# sudo rm -rf /etc/nginx/sites-enabled/default
+# sudo rm -rf /var/www/html/admin
+# sudo scp -r ./build /var/www/html/admin
+# sudo -E ADMIN_DOMAIN_HOST=$ADMIN_DOMAIN_HOST -E bash -c 'cat << EOF > /etc/nginx/sites-available/admin.nguyentungson.tech.conf
+# server {
+#     listen 80;
+#     listen [::]:80;
 
-  location / {
-    root /var/www/html/admin;
-    index index.html;
-    try_files \$uri /index.html;
-  }
+#     server_name $ADMIN_DOMAIN_HOST;
+#     root /var/www/html/admin;
+#     index index.html;
+#   location / {
+#     try_files \$uri /index.html;
+#   }
+#   location /api/ {
+#     proxy_pass http://'$IP':5000;
+#     proxy_read_timeout 300;
+#     proxy_set_header Host \$host;
+#     proxy_set_header X-Real-IP \$remote_addr;
+#     proxy_set_header Upgrade \$http_upgrade;
+#     proxy_set_header Connection 'upgrade';
+#     proxy_cache_bypass \$http_upgrade;
+#  }
+#     if (\$http_x_forwarded_proto = "http") {
+#       return 301 https://\$server_name\$request_uri;
+#   }
+# }
 
-  location /api/ {
-    proxy_pass http://'$IP':5000;
- }
-}
-EOF'
+# server {
+#     listen 443 ssl http2;
+#     listen [::]:443 ssl http2;
+#     server_name $ADMIN_DOMAIN_HOST;
+
+#     include snippets/ssl-$DOMAIN_HOST.conf;
+#     include snippets/ssl-params.conf;
+
+#     root /var/www/html/admin;
+#     index index.html;
+
+#     location / {
+#         try_files \$uri /index.html;
+#     }
+
+#     location /api/ {
+#         proxy_pass http://'$IP':5000;
+#         proxy_read_timeout 300;
+#         proxy_set_header Host \$host;
+#         proxy_set_header X-Real-IP \$remote_addr;
+#         proxy_set_header Upgrade \$http_upgrade;
+#         proxy_set_header Connection 'upgrade';
+#         proxy_cache_bypass \$http_upgrade;
+#     }
+# }
+# EOF'
 sudo systemctl restart nginx
 
