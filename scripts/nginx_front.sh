@@ -58,7 +58,7 @@ server {
     try_files \$uri /index.html;
   }
   location /api/ {
-    proxy_pass http://'$IP':5000;
+    proxy_pass http://localhost:5000;
     proxy_read_timeout 300;
     proxy_set_header Host \$host;
     proxy_set_header X-Real-IP \$remote_addr;
@@ -87,7 +87,7 @@ server {
     }
 
     location /api/ {
-        proxy_pass http://'$IP':5000;
+        proxy_pass http://localhost:5000;
         proxy_read_timeout 300;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
@@ -122,7 +122,7 @@ server {
     try_files \$uri /index.html;
   }
   location /api/ {
-    proxy_pass http://'$IP':5000;
+    proxy_pass http://localhost:5000;
     proxy_read_timeout 300;
     proxy_set_header Host \$host;
     proxy_set_header X-Real-IP \$remote_addr;
@@ -151,7 +151,7 @@ server {
     }
 
     location /api/ {
-        proxy_pass http://'$IP':5000;
+        proxy_pass http://localhost:5000;
         proxy_read_timeout 300;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
