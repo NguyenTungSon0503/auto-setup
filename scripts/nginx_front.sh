@@ -1,3 +1,27 @@
+# MUST CREATE nginx file with this content before get certification
+
+# server {
+#     listen 80;
+#     listen [::]:80;
+
+#     server_name $DOMAIN_HOST www.$DOMAIN_HOST;
+#     root /var/www/html/gr2;
+#     index index.html;
+#   location / {
+#     try_files \$uri /index.html;
+#   }
+#   location /api/ {
+#     proxy_pass http://localhost:5000;
+#     proxy_read_timeout 300;
+#     proxy_set_header Host \$host;
+#     proxy_set_header X-Real-IP \$remote_addr;
+#     proxy_set_header Upgrade \$http_upgrade;
+#     proxy_set_header Connection 'upgrade';
+#     proxy_cache_bypass \$http_upgrade;
+#  }
+# }
+
+
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
 sudo apt install -y certbot
